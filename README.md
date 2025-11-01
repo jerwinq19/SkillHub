@@ -30,8 +30,8 @@ A simple yet powerful **full-stack web application** built using **Django**, des
 
 ### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone [https://github.com/jerwinq19/SkillHub.git]
+cd SkillHub
 ```
 
 ### 2️⃣ Create a Virtual Environment  
