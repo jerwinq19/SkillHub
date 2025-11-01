@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Service
+from .models import Service, Transaction
 
 
 class RegisterForm(forms.ModelForm):
@@ -27,3 +27,11 @@ class ServiceForm(forms.ModelForm):
             'service_description',
             'price'
         ]
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['booking_status']
+        widgets = {
+            'booking_status': forms.Select(attrs={'class': 'form-select'}),
+        }

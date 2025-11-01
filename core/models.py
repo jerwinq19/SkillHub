@@ -30,7 +30,7 @@ class Transaction(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="service")
     booking_owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     booking_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Pending")
-    date_issued = models.DateTimeField(auto_now_add=True)
+    date_issued = models.DateTimeField(auto_now_add=True, editable=True)
     
     def __str__(self):
         return f"{self.service.service_name} - {self.booking_status} - {self.booking_owner.username}"

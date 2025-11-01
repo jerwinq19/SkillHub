@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views import generic
+from django.views import generic, View
 from . import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -50,7 +51,7 @@ class AddServiceView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('profile', kwargs={'pk': self.request.user.pk })
+        return reverse_lazy('manage_service', kwargs={'pk': self.request.user.pk })
 
 class UserProfileView(LoginRequiredMixin, generic.DetailView):
     template_name = 'core/profile.html'
@@ -73,17 +74,13 @@ class ServiceDetailView(LoginRequiredMixin, generic.DetailView):
         context = super().get_context_data(**kwargs)
         
         context['detail_service_data'] = Service.objects.filter(pk=self.kwargs['pk'], slug=self.kwargs['slug'])
-        
-        print("this run")
+    
         return context
 
 class DeleteServie(LoginRequiredMixin, generic.DeleteView):
     model = Service
     template_name = 'core/confirm_delete.html'
 
-    
-    # debug
-    print("Delete run")
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.request.user.pk })
     
@@ -92,9 +89,6 @@ class UpdateServiceView(LoginRequiredMixin, generic.UpdateView):
     model = Service
     form_class = forms.ServiceForm
     template_name = 'core/update_service.html'
-    
-    # debug
-    print("update run")
     
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.request.user.pk })
@@ -121,13 +115,36 @@ class ManageServiceView(LoginRequiredMixin, generic.TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['total_booking'] = Transaction.objects.filter(service__provider=self.request.user).count()
+        context['total_money'] = Transaction.objects.filter(service__provider=self.request.user).aggregate(total=Sum('service__price'))
+        context['who_avail'] = Transaction.objects.filter(service__provider=self.request.user)
         
-        context['total_booking'] = Transaction.objects.exclude(booking_owner=self.request.user).count()
-        context['who_avail'] = Transaction.objects.exclude(booking_owner=self.request.user)
-        context['total_money'] = Transaction.objects.exclude(booking_owner=self.request.user).aggregate(total=Sum('service__price'))
+        context['pending'] = Transaction.objects.filter(service__provider=self.request.user,booking_status="Pending").count() 
+        context['accepted'] = Transaction.objects.filter(service__provider=self.request.user,booking_status="Accepted").count() 
+        context['completed'] = Transaction.objects.filter(service__provider=self.request.user,booking_status="Completed").count()
+        context['cancelled'] = Transaction.objects.filter(service__provider=self.request.user,booking_status="Cancelled").count()
         
         return context
 
+'''
+    TODO: 
+    Gumawa kung pano ma iedit yung by id yung each service.
+'''
+
+class UpdateTransactionView(LoginRequiredMixin, generic.UpdateView):
+    model = Transaction
+    form_class = forms.TransactionForm
+    template_name = 'core/update_transaction.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('manage_service', kwargs={'pk': self.request.user.id })
+
+class DeleteTransactionView(LoginRequiredMixin, generic.DeleteView):
+    model = Transaction
+    template_name = 'core/delete_transaction.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('manage_service', kwargs={'pk': self.request.user.id })
 
 class View404(generic.TemplateView):
     template_name = '404.html'

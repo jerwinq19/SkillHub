@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Transaction {% endblock %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-4 w-100" style="max-width: 500px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold text-primary">
+                    <i class="bi bi-pencil-square me-2"></i> Update Transaction
+                </h4>
+                <p class="text-muted small">Choose a new booking status below.</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="id_booking_status" class="form-label fw-semibold text-secondary">
+                        Booking Status
+                    </label>
+                    <div class="dropdown-container position-relative">
+                        {{ form.booking_status }}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'manage_service' user.pk %}" class="btn btn-outline-secondary px-4 rounded-3">
+                        <i class="bi bi-arrow-left me-1"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4 rounded-3">
+                        <i class="bi bi-check2-circle me-1"></i> Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Make the dropdown look modern and elegant */
+    select.form-select {
+        background-color: #f9fafc;
+        border: 1.5px solid #d0d7de;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        color: #333;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+        transition: all 0.2s ease-in-out;
+    }
+
+    select.form-select:hover {
+        border-color: #6ea8fe;
+        box-shadow: 0 0 0 3px rgba(13,110,253,0.15);
+        background-color: #fff;
+    }
+
+    select.form-select:focus {
+        outline: none;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 4px rgba(13,110,253,0.25);
+        background-color: #fff;
+    }
+</style>
+{% endblock %}

@@ -24,6 +24,9 @@ urlpatterns = [
     # manage service
     path('user/<int:pk>/manage/', views.ManageServiceView.as_view(), name="manage_service"),
     
+    # transaction crud
+    path('service/manage/update/<int:pk>/', views.UpdateTransactionView.as_view(), name="update_transaction"),
+    path('service/manage/delete/<int:pk>/', views.DeleteTransactionView.as_view(), name="delete_transaction"),
     # error page
     path('404/', views.View404.as_view(), name="404_page")
 ]
