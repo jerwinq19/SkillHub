@@ -73,13 +73,13 @@ Then open your browser and visit:
 ## 🧩 Project Structure  
 
 ```
-📁 your_project/
+📁 services/
 │
 ├── manage.py
 ├── requirements.txt
 ├── README.md
 │
-├── 📁 app_name/
+├── 📁 core/
 │   ├── migrations/
 │   ├── templates/
 │   ├── static/
@@ -88,7 +88,7 @@ Then open your browser and visit:
 │   ├── urls.py
 │   └── forms.py
 │
-└── 📁 your_project/
+└── 📁 services/
     ├── settings.py
     ├── urls.py
     ├── asgi.py
