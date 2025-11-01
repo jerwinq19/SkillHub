@@ -109,6 +109,6 @@ Then open your browser and visit:
 
 **Jerwin Quijano**  
 📅 *2025*  
-📧 *[Add your contact or GitHub link here]*  
+📧 *http://github.com/jerwinq19/*  
 
 ---
