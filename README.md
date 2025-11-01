@@ -1,6 +1,6 @@
-# 💻 Django Full-Stack Web App  
+# 💻 SkillHub
 
-A simple yet powerful **full-stack web application** built using **Django**, designed to demonstrate clean architecture, modular development, and efficient backend logic.  
+A simple skill market place where you can avail or post your own skills!
 
 ---
 
