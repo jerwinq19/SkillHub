@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body text-center">
+
+        <div class="mb-4">
+            <i class="bi bi-question-circle text-primary display-4"></i>
+        </div>
+
+        <h4 class="fw-bold text-dark mb-3">Confirm Booking</h4>
+        <p class="text-muted mb-4">
+            Are you sure you want to book this service?
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.booking_status.as_hidden }}
+            <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-primary px-4">
+                <i class="bi bi-check-circle me-1"></i> Yes, Book
+            </button>
+            <a href="{% url 'profile' user.pk %}" class="btn btn-outline-secondary px-4">
+                <i class="bi bi-x-circle me-1"></i> Cancel
+            </a>
+            </div>
+        </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

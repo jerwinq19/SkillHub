@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary mb-0">
+            <i class="bi bi-speedometer2 me-2"></i> Manage Bookings
+        </h2>
+        <a href="{% url 'add_service' %}" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-circle me-1"></i> Add New Service
+        </a>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body text-center py-4">
+                    <h6 class="text-muted mb-1">Total Bookings</h6>
+                    <h3 class="fw-bold text-primary mb-0">{{ total_booking }}</h3>
+                    <i class="bi bi-calendar-check text-secondary fs-4 mt-2"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body text-center py-4">
+                    <h6 class="text-muted mb-1">Total Earnings</h6>
+                    <h3 class="fw-bold text-success mb-0">₱{{ total_money.total|floatformat:2 }}</h3>
+                    <i class="bi bi-cash-coin text-success fs-4 mt-2"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-body p-4">
+            <h5 class="fw-bold text-dark mb-3">
+                <i class="bi bi-list-check me-2 text-primary"></i> Booking Records
+            </h5>
+
+            {% if who_avail %}
+            <div class="table-responsive">
+                <table class="table align-middle table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Service Name</th>
+                            <th>Owner</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Date Issued</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in who_avail %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="fw-semibold">{{ data.service.service_name }}</td>
+                            <td>{{ data.booking_owner }}</td>
+                            <td>
+                                {% if data.booking_status == "Pending" %}
+                                    <span class="badge bg-warning text-dark rounded-pill px-3 py-2">Pending</span>
+                                {% elif data.booking_status == "Approved" %}
+                                    <span class="badge bg-success rounded-pill px-3 py-2">Approved</span>
+                                {% elif data.booking_status == "Rejected" %}
+                                    <span class="badge bg-danger rounded-pill px-3 py-2">Rejected</span>
+                                {% else %}
+                                    <span class="badge bg-secondary rounded-pill px-3 py-2">{{ data.booking_status }}</span>
+                                {% endif %}
+                            </td>
+                            <td>₱{{ data.service.price|floatformat:2 }}</td>
+                            <td>{{ data.date_issued|date:"M d, Y" }}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{% url "update_service" data.service.pk %}" class="btn btn-outline-warning btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a href="" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-folder-x display-6 d-block mb-3"></i>
+                <h5>No bookings yet</h5>
+                <p class="small">Once someone avails your services, they’ll appear here.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

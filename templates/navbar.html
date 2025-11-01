@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+            SkillHub
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' user.id %}">
+                        <i class="bi bi-person-circle"></i> Profile
+                    </a>
+                </li>
+
+                <!-- Logout Button -->
+                <li class="nav-item ms-lg-3">
+                    {% include './components/logout.html' %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

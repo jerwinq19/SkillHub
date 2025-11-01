@@ -1,0 +1,11 @@
+<form method="post" action="{% url 'logout' %}" class="d-inline">
+    {% csrf_token %}
+    <button 
+        type="submit" 
+        class="btn btn-outline-light btn-sm px-3 d-flex align-items-center gap-1"
+        title="Logout"
+    >
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="d-none d-lg-inline">Logout</span>
+    </button>
+</form>

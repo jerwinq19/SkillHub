@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center align-items-center min-vh-75">
+    <div class="card shadow-lg border-0 rounded-4 text-center p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+
+        <!-- Header Icon -->
+        <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+            <i class="bi bi-exclamation-triangle-fill fs-2"></i>
+        </div>
+
+        <!-- Title -->
+        <h3 class="fw-bold mb-2 text-danger">Confirm Deletion</h3>
+        <p class="text-muted mb-4">
+            Are you sure you want to delete <strong class="text-dark">{{ object }}</strong>?  
+            <br>This action <span class="fw-semibold text-danger">cannot be undone</span>.
+        </p>
+
+        <!-- Form -->
+        <form method="POST" class="d-flex flex-column gap-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg fw-semibold shadow-sm">
+            <i class="bi bi-trash-fill me-2"></i> Yes, Delete
+            </button>
+            <a href="{% url 'profile' user.pk %}" class="btn btn-outline-secondary btn-lg fw-semibold shadow-sm">
+            <i class="bi bi-arrow-left"></i> Cancel
+            </a>
+        </form>
+        </div>
+    </div>
+</div>
+
+<!-- Optional custom styling -->
+<style>
+    .min-vh-75 {
+        min-height: 75vh;
+    }
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+</style>
+{% endblock %}

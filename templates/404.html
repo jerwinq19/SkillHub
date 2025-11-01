@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
+        img {
+            max-width: 40px; /* smaller size */
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .btn-group {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My brother 404 not found...</h1>
+        <p class="lead text-muted mb-4">Looks like this page got lost in the cornfield 🌽</p>
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d7a41ba3-fa27-434f-b79b-92a22f8594fa/dg3kh2j-ada96188-3332-428c-8a1d-8bbde03279ad.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kN2E0MWJhMy1mYTI3LTQzNGYtYjc5Yi05MmEyMmY4NTk0ZmEvZGcza2gyai1hZGE5NjE4OC0zMzMyLTQyOGMtOGExZC04YmJkZTAzMjc5YWQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.SvhwccbN2PxKF5h0jyRriwQy7wIwLWu3B8Dc4BOPrR0" 
+        alt="black man holding a corn" class="img-fluid mb-4">
+
+        <div class="btn-group">
+            <a href="{% url 'home' %}" class="btn btn-primary">Go Home</a>
+            <button class="btn btn-outline-secondary" onclick="history.back()">Go Back</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

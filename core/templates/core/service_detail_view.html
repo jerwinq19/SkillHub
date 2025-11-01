@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">
+            <i class="bi bi-briefcase-fill me-2"></i>Service Details
+        </h1>
+        <p class="text-muted">Explore the details of the selected service below.</p>
+    </div>
+
+    {% if detail_service_data %}
+        <div class="row justify-content-center">
+            {% for data in detail_service_data %}
+                <div class="col-md-8">
+                    <div class="card shadow-lg border-0 rounded-4 mb-4">
+                        <div class="card-body p-4">
+                            <h3 class="card-title text-dark fw-semibold mb-3">
+                                <i class="bi bi-tools me-2 text-primary"></i>{{ data.service_name }}
+                            </h3>
+
+                            <p class="card-text mb-3">
+                                <strong>Description:</strong><br>
+                                <span class="text-muted">{{ data.service_description }}</span>
+                            </p>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-2">
+                                    <strong>Price:</strong>
+                                    <p class="text-success fw-bold mb-0">₱{{ data.price }}</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <strong>Provider:</strong>
+                                    <p class="text-muted mb-0">{{ data.provider.username }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-3">
+                                {% if data.provider.pk != user.pk %}
+                                <a href="{% url "booking_view" data.pk %}" class="btn btn-primary me-2">
+                                    <i class="bi bi-calendar-check me-1"></i> Book Now
+                                </a>
+                                {% else %}
+
+                                {% endif %}
+                                <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-house-door me-1"></i> Go Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">No service details available.</p>
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-3">
+                <i class="bi bi-house-door me-1"></i> Go Home
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
