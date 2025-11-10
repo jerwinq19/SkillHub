@@ -2,9 +2,15 @@ asgiref==3.10.0
 channels==4.3.1
 Django==5.2.7
 django-cors-headers==4.9.0
+django-extensions==4.1
 djangorestframework==3.16.1
 djangorestframework_simplejwt==5.5.1
+numpy==2.3.4
+pandas==2.3.3
 PyJWT==2.10.1
+python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
+pytz==2025.2
+six==1.17.0
 sqlparse==0.5.3
 tzdata==2025.2
